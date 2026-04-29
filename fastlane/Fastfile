@@ -1,0 +1,90 @@
+default_platform(:android)
+
+root_dir = File.expand_path(File.join(File.dirname(__FILE__), "../"))
+string_xml = File.join(root_dir, "app/src/main/res/values/strings.xml")
+apk_path = File.join(root_dir, "app/build/outputs/apk/debug/app-debug.apk")
+build_gradle = File.join(root_dir, "app/build.gradle.kts")
+display_name = "Nevis FIDO2 Example Android"
+
+def report_on_success(message)
+    slack(
+        message: "#{message}\nCheck build logs: #{ENV['CURRENT_BUILD_URL']}",
+        slack_url: ENV["SLACK_WEBHOOK_URL"]
+    ) if ENV["SLACK_WEBHOOK_URL"]
+end
+
+def report_on_error(message, exception)
+    slack(
+        message: "#{message}\nCheck build logs: #{ENV['CURRENT_BUILD_URL']}",
+        slack_url: ENV["SLACK_WEBHOOK_URL"],
+        success: false,
+        attachment_properties: {
+            fields: [
+                {
+                    title: "Error message",
+                    value: exception.to_s,
+                    short: false
+                }
+            ]
+        }
+    ) if ENV["SLACK_WEBHOOK_URL"]
+    UI.user_error!(exception.to_s)
+end
+
+desc "Build and tag the application"
+desc "#### Options"
+desc " * **`host_name`**: The host name of the backend to connect to."
+desc " * **`backend_access_token`**: The token used to access the backend."
+desc ""
+lane :main do |options|
+    host_name = options[:host_name] || ENV["HOST_NAME"]
+    # rubocop:disable Lint/UselessAssignment
+    backend_access_token = options[:backend_access_token] || ENV["BACKEND_ACCESS_TOKEN"]
+    # rubocop:enable Lint/UselessAssignment
+
+    version_number = options[:version_number] || "1.0.0"
+    build_number = options[:build_number] || "1"
+
+    UI.message("Building #{display_name} #{version_number} (#{build_number}) 📦")
+
+    android_set_version_name(
+        version_name: version_number,
+        gradle_file: build_gradle
+    )
+
+    android_set_version_code(
+        version_code: build_number,
+        gradle_file: build_gradle
+    )
+
+    modify_file(
+        file_path: string_xml,
+        old_value: "\"include\": \"https://myinstance.mauth.nevis.cloud/.well-known/assetlinks.json\"",
+        new_value: "\"include\": \"https://#{host_name}/.well-known/assetlinks.json\""
+    )
+
+    modify_file(
+        file_path: build_gradle,
+        old_value: "android {",
+        new_value: ENV["SIGNING_CONFIGS"],
+        mode: "append"
+    )
+
+    modify_file(
+        file_path: build_gradle,
+        old_value: "signingConfig = signingConfigs.getByName(\"debug\")",
+        new_value: "signingConfig = signingConfigs.getByName(\"signing\")"
+    )
+
+    gradle(task: "clean assembleDebug")
+
+    firebase_app_distribution(
+        app: ENV["FIREBASE_APP_ID"],
+        apk_path:,
+        groups: "developers, internal-testers, presales"
+    ) if ENV["FIREBASE_APP_ID"]
+
+    report_on_success("#{display_name} build completed: #{version_number} (#{build_number}) ✅")
+rescue => e
+    report_on_error("#{display_name} build failed ❌", e)
+end

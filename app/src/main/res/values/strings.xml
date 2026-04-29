@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">FIDO2 Example</string>
+
+    <string name="composable_username">Username</string>
+
+    <string name="home_registration_title">Registration</string>
+    <string name="home_registration_button_title">Register</string>
+    <string name="home_authentication_title">Authentication</string>
+    <string name="home_authentication_button_title">Authenticate</string>
+    <string name="home_authentication_usernameless_title">Authentication (Usernameless)</string>
+    <string name="home_authentication_usernameless_button_title">Authenticate (Usernameless)</string>
+    <string name="home_authorization_via_web_title">Authorization via Web</string>
+    <string name="home_register_via_web_button_title">Register via Web</string>
+    <string name="home_authenticate_via_web_button_title">Authenticate via Web</string>
+
+    <string name="authentication_options_options_title">Options</string>
+    <string name="authentication_options_user_verification_requirement_title">User Verification Requirement</string>
+
+    <string name="registration_options_options_title">Options</string>
+    <string name="registration_options_user_verification_requirement_title">User Verification Requirement</string>
+    <string name="registration_options_authenticator_attachment_title">Authenticator Attachment</string>
+    <string name="registration_options_attestation_conveyance_preference_title">Attestation Conveyance Preference</string>
+    <string name="registration_options_resident_key_title">Resident Key</string>
+
+    <string name="main_host">Host: %s</string>
+    <string name="main_host_unknown">Unknown</string>
+
+    <string name="asset_statements" translatable="false">
+    [{
+      \"include\": \"https://myinstance.mauth.nevis.cloud/.well-known/assetlinks.json\"
+    }]
+    </string>
+    -->
+
+    <string name="user_friendly_name_provider_date_time_format" translatable="false">dd MMM yyyy HH:mm:ss</string>
+    <string name="user_friendly_name_provider_unknown_device_name" translatable="false">Unknown</string>
+    <string name="auth_redirect_scheme" translatable="false">fido2.example.app</string>
+    <string name="operation_authentication" translatable="false">auth</string>
+    <string name="operation_registration" translatable="false">reg</string>
+</resources>

@@ -1,0 +1,33 @@
+name: Verify Pull Request
+
+on:
+  pull_request:
+    branches: [ 'main' ]
+    types: [opened, edited, synchronize, reopened]
+  workflow_dispatch:
+
+env:
+    HOST_NAME: ${{ vars.HOST_NAME }}
+    BACKEND_ACCESS_TOKEN: ${{ secrets.BACKEND_ACCESS_TOKEN }}
+
+    RUBY_VERSION: ${{ vars.RUBY_VERSION }}
+    JAVA_VERSION: ${{ vars.JAVA_VERSION }}
+
+jobs:
+  pr:
+    name: Verify Pull Request
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Project
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup-android
+
+      - name: Lint Ruby
+        uses: ./.github/actions/lint-ruby
+
+      - name: Verify Pull Request
+        run: |
+            ./gradlew clean && ./gradlew assembleDebug
