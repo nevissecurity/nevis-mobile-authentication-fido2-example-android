@@ -9,10 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-    KEYSTORE_FILE: ${{ secrets.KEYSTORE_FILE }}
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    SIGNING_CONFIGS: ${{ vars.SIGNING_CONFIGS }}
-    SIGNING_KEY_STORE_PASSWORD: ${{ secrets.SIGNING_KEY_STORE_PASSWORD }}
     FIREBASE_APP_ID: ${{ secrets.FIREBASE_APP_ID }}
     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
     HOST_NAME: ${{ secrets.HOST_NAME }}

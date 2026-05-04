@@ -63,19 +63,6 @@ lane :main do |options|
         new_value: "\"include\": \"https://#{host_name}/.well-known/assetlinks.json\""
     )
 
-    modify_file(
-        file_path: build_gradle,
-        old_value: "android {",
-        new_value: ENV["SIGNING_CONFIGS"],
-        mode: "append"
-    )
-
-    modify_file(
-        file_path: build_gradle,
-        old_value: "signingConfig = signingConfigs.getByName(\"debug\")",
-        new_value: "signingConfig = signingConfigs.getByName(\"signing\")"
-    )
-
     gradle(task: "clean assembleDebug")
 
     firebase_app_distribution(

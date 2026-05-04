@@ -16,14 +16,6 @@ runs:
               ruby-version: ${{ env.RUBY_VERSION }}
               bundler-cache: true
 
-        - name: Decode Keystore
-          if: ${{ github.workflow == 'Main Branch Commit' }}
-          uses: timheuer/base64-to-file@v1
-          with:
-              fileName: 'keystore-fido2-example-app-android-dev.jks'
-              fileDir: './etc'
-              encodedString: ${{ env.KEYSTORE_FILE }}
-
         - name: Cache Gradle
           uses: actions/cache@v4
           with:
