@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 env:
-    HOST_NAME: ${{ vars.HOST_NAME }}
+    HOST_NAME: ${{ secrets.HOST_NAME }}
     BACKEND_ACCESS_TOKEN: ${{ secrets.BACKEND_ACCESS_TOKEN }}
 
     RUBY_VERSION: ${{ vars.RUBY_VERSION }}
