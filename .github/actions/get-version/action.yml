@@ -15,9 +15,10 @@ runs:
     steps:
         - name: Get Version Number
           id: get_version_number
-          uses: ltDino/android-get-version-action@v1.0
-          with:
-              gradlePath: app/build.gradle.kts
+          shell: bash
+          run: |
+              VERSION=$(grep 'versionName' app/build.gradle.kts | sed 's/.*versionName = "\(.*\)".*/\1/')
+              echo "versionName=$VERSION" >> "$GITHUB_OUTPUT"
 
         - name: Generate Build Number
           id: get_build_number
