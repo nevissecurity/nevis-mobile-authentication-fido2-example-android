@@ -28,6 +28,9 @@ jobs:
       - name: Lint Ruby
         uses: ./.github/actions/lint-ruby
 
+      - name: Lint Kotlin
+        uses: ./.github/actions/lint-kotlin
+
       - name: Verify Pull Request
         run: |
             ./gradlew clean && ./gradlew assembleDebug

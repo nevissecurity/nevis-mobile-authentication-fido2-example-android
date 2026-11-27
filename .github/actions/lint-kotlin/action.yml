@@ -1,0 +1,9 @@
+name: Lint Kotlin
+description: Lints Kotlin code of the application
+
+runs:
+    using: composite
+    steps:
+        - name: Run Kotlin Linter
+          shell: bash
+          run: ./gradlew ktlintCheck

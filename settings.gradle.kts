@@ -22,4 +22,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "FIDO2 Example"
 include(":app")
- 
