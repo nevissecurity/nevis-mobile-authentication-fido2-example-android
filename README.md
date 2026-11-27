@@ -88,7 +88,8 @@ The [Android Credential Manager](https://developer.android.com/identity/sign-in/
 | Android 13      | 33        | Google Password Manager only |
 | Android 14+     | 34+       | Multiple providers supported |
 
-> **Note:** Prefilling the username field via autofill is only available for `View`-based UIs. As this app uses **Jetpack Compose**, automatic credential field prefilling is not available. See [credential-manager-autofill](https://developer.android.com/identity/autofill/credential-manager-autofill) and [indicate_credential_fields](https://developer.android.com/identity/sign-in/credential-manager#indicate_credential_fields).
+> [!NOTE]
+> Prefilling the username field via autofill is only available for `View`-based UIs. As this app uses **Jetpack Compose**, automatic credential field prefilling is not available. See [credential-manager-autofill](https://developer.android.com/identity/autofill/credential-manager-autofill) and [indicate_credential_fields](https://developer.android.com/identity/sign-in/credential-manager#indicate_credential_fields).
 
 ## Configuration
 
@@ -99,6 +100,7 @@ HOST_NAME=<your-authentication-cloud-hostname>
 BACKEND_ACCESS_TOKEN=<your-access-token>
 ```
 
+> [!TIP]
 > **CI environments:** Instead of `local.properties`, the build also accepts `HOST_NAME` and `BACKEND_ACCESS_TOKEN` as environment variables (or system/project properties). This is what the GitHub Actions workflows use.
 
 The values are injected at build time as `BuildConfig` fields and are never hardcoded in source.
@@ -114,8 +116,21 @@ You must also uncomment the lines in `app/build.gradle.kts` where the `signingCo
 
 An example of `assetlinks.json` can be found below. Note that you must also include the package_name of this application (`ch.nevis.mobile.authentication.fido2.example`).
 
-```properties title="./well-known/assetlinks.json"
-[{"relation"=["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"ch.nevis.mobile.authentication.fido2.example","sha256_cert_fingerprints":["CF:B5:E4:C3:AD:9D:02:7F:C1:B1:C9:0E:43:D6:B7:38:C8:66:97:08:73:76:BD:95:91:CB:30:20:8C:89:80:91","91:D7:03:AF:EB:09:57:27:40:91:9E:A7:4F:F1:D1:DD:4A:49:15:27:7E:BC:F3:91:5C:BC:30:F0:32:07:57:B7"]}}]
+```json title="./well-known/assetlinks.json"
+[
+    {
+        "relation":[
+            "delegate_permission/common.handle_all_urls"
+        ],
+        "target":{
+            "namespace":"android_app",
+            "package_name":"ch.nevis.mobile.authentication.fido2.example",
+            "sha256_cert_fingerprints":[
+                "CF:B5:E4:C3:AD:9D:02:7F:C1:B1:C9:0E:43:D6:B7:38:C8:66:97:08:73:76:BD:95:91:CB:30:20:8C:89:80:91","91:D7:03:AF:EB:09:57:27:40:91:9E:A7:4F:F1:D1:DD:4A:49:15:27:7E:BC:F3:91:5C:BC:30:F0:32:07:57:B7"
+            ]
+        }
+    }
+]
 ```
 
 You must update the [relying origin](https://docs.nevis.net/authcloud/management-console/system#relying-origin) in the AuthCloud instance configuration. Here you must provide as origin the key hash of your application (of type `android:apk-key-hash:<key hash>`). Refer to [Facet ID](https://docs.nevis.net/nevisaccessapp/appendixes/facetid-calculation#android) documentation to know how to calculate the origin.
@@ -140,9 +155,9 @@ The project follows [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2
 
 ```
 ┌─────────────────────────────────────────────────┐
-│  Presentation (ui/)                              │
-│  Jetpack Compose screens • HomeScreenViewModel   │
-│  StateFlow-driven UI state • Navigation          │
+│  Presentation (ui/)                             │
+│  Jetpack Compose screens • HomeScreenViewModel  │
+│  StateFlow-driven UI state • Navigation         │
 ├─────────────────────────────────────────────────┤
 │  Domain (domain/)                               │
 │  Use cases • Repository interface               │

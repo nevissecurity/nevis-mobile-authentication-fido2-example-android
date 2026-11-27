@@ -78,7 +78,7 @@ All configuration is **build-time only**. To point the app at your own environme
 bundle install && bundle exec rubocop -c .rubocop.yml
 ```
 
-Requirements: JDK 17 and the Gradle wrapper in the repo (Gradle 8.11.1, AGP 8.10.1, Kotlin 2.1.21). `minSdk` 28 (Android 9), `compileSdk` / `targetSdk` 35, Java 11 bytecode. Passkeys need a physical device, or an emulator with Google Play Services and a signed-in Google account, with a screen lock set. There is no Kotlin linter (ktlint / detekt) configured and there are no unit or instrumentation tests; to verify changes, run the app against an Authentication Cloud instance.
+Requirements: JDK 17 and the Gradle wrapper in the repo (Gradle 8.11.1, AGP 8.10.1, Kotlin 2.1.21). `minSdk` 28 (Android 9), `compileSdk` / `targetSdk` 35, Java 11 bytecode. Passkeys need a physical device, or an emulator with Google Play Services and a signed-in Google account, with a screen lock set. Kotlin linting is configured with ktlint; run `./gradlew ktlintCheck`, as PR CI does. There are no unit or instrumentation tests; to verify runtime behavior, run the app against an Authentication Cloud instance.
 
 ## Architecture
 
