@@ -31,10 +31,7 @@ import ch.nevis.mobile.authentication.fido2.example.ui.theme.PaddingSmall
  * @param resultMessage The message to display.
  */
 @Composable
-fun ResultMessage(
-    modifier: Modifier = Modifier,
-    resultMessage: ResultMessage,
-) {
+fun ResultMessage(modifier: Modifier = Modifier, resultMessage: ResultMessage) {
     if (resultMessage.message.isNotBlank()) {
         val fontColor = when (resultMessage) {
             is ErrorResultMessage -> colorResource(R.color.result_error)
@@ -58,7 +55,7 @@ fun ResultMessage(
                     text = resultMessage.title,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Center
                 )
             }
 
@@ -69,7 +66,7 @@ fun ResultMessage(
                 color = fontColor,
                 text = resultMessage.message,
                 fontSize = 12.sp,
-                lineHeight = 14.sp,
+                lineHeight = 14.sp
             )
         }
     }
@@ -102,5 +99,11 @@ fun ErrorResultMessageWithTitlePreview() {
 @Preview
 @Composable
 fun SuccessResultMessageWithLongMessagePreview() {
-    ResultMessage(resultMessage = SuccessResultMessage(message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis nisi ut justo mattis faucibus a elementum risus. Cras ut libero vel metus ornare mattis. Etiam semper elementum erat, in bibendum lacus mollis semper. In vel auctor velit. Nullam vitae ligula mollis, tristique nisl a, elementum enim. Donec vel blandit arcu. Ut a ligula ut massa consequat rhoncus. Donec consectetur orci nec elit luctus, non bibendum dui dignissim. Cras faucibus eros sollicitudin odio luctus lacinia. Aliquam feugiat est ullamcorper justo aliquam, sit amet accumsan urna varius."))
+    ResultMessage(
+        resultMessage = SuccessResultMessage(
+            message = """
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis nisi ut justo mattis faucibus a elementum risus. Cras ut libero vel metus ornare mattis. Etiam semper elementum erat, in bibendum lacus mollis semper. In vel auctor velit. Nullam vitae ligula mollis, tristique nisl a, elementum enim. Donec vel blandit arcu. Ut a ligula ut massa consequat rhoncus. Donec consectetur orci nec elit luctus, non bibendum dui dignissim. Cras faucibus eros sollicitudin odio luctus lacinia. Aliquam feugiat est ullamcorper justo aliquam, sit amet accumsan urna varius.
+            """
+        )
+    )
 }

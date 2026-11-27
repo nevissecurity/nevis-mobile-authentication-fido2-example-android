@@ -12,5 +12,5 @@ data class ApprovalResponse(
     val transactionId: String,
     val userId: String,
     val statusToken: String,
-    val credentialRequestOptions: CredentialRequestOptions,
+    val credentialRequestOptions: CredentialRequestOptions
 )

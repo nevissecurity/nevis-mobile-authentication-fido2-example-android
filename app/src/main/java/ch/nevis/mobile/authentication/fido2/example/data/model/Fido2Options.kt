@@ -19,7 +19,7 @@ import ch.nevis.mobile.authentication.fido2.example.domain.model.UserVerificatio
 data class Fido2Options(
     val authenticatorSelection: AuthenticatorSelection? = null,
     val attestation: String? = null,
-    val userVerification: String? = null,
+    val userVerification: String? = null
 ) {
     companion object {
         /**
@@ -29,18 +29,34 @@ data class Fido2Options(
          * @param registrationOptions The domain model to map.
          * @return The corresponding [Fido2Options] DTO.
          */
-        fun from(registrationOptions: RegistrationOptions): Fido2Options {
-            return Fido2Options(
-                authenticatorSelection = AuthenticatorSelection(
-                    registrationOptions.residentKey == ResidentKey.REQUIRED || registrationOptions.residentKey == ResidentKey.PREFERRED,
-                    if (registrationOptions.residentKey != ResidentKey.UNSPECIFIED) registrationOptions.residentKey.value else null,
-                    if (registrationOptions.userVerificationRequirement != UserVerificationRequirement.UNSPECIFIED) registrationOptions.userVerificationRequirement.value else null,
-                    if (registrationOptions.authenticatorAttachment != AuthenticatorAttachment.UNSPECIFIED) registrationOptions.authenticatorAttachment.value else null
-                ),
-                attestation = if (registrationOptions.attestationConveyancePreference != AttestationConveyancePreference.UNSPECIFIED) registrationOptions.attestationConveyancePreference.value else null,
-                userVerification = null
-            )
-        }
+        fun from(registrationOptions: RegistrationOptions): Fido2Options = Fido2Options(
+            authenticatorSelection = AuthenticatorSelection(
+                registrationOptions.residentKey == ResidentKey.REQUIRED || registrationOptions.residentKey == ResidentKey.PREFERRED,
+                if (registrationOptions.residentKey != ResidentKey.UNSPECIFIED) registrationOptions.residentKey.value else null,
+                if (registrationOptions.userVerificationRequirement !=
+                    UserVerificationRequirement.UNSPECIFIED
+                ) {
+                    registrationOptions.userVerificationRequirement.value
+                } else {
+                    null
+                },
+                if (registrationOptions.authenticatorAttachment !=
+                    AuthenticatorAttachment.UNSPECIFIED
+                ) {
+                    registrationOptions.authenticatorAttachment.value
+                } else {
+                    null
+                }
+            ),
+            attestation = if (registrationOptions.attestationConveyancePreference !=
+                AttestationConveyancePreference.UNSPECIFIED
+            ) {
+                registrationOptions.attestationConveyancePreference.value
+            } else {
+                null
+            },
+            userVerification = null
+        )
 
         /**
          * Converts a domain-layer [AuthenticationOptions] to a [Fido2Options] DTO suitable
@@ -49,12 +65,16 @@ data class Fido2Options(
          * @param authenticationOptions The domain model to map.
          * @return The corresponding [Fido2Options] DTO.
          */
-        fun from(authenticationOptions: AuthenticationOptions): Fido2Options {
-            return Fido2Options(
-                authenticatorSelection = null,
-                attestation = null,
-                userVerification = if (authenticationOptions.userVerificationRequirement != UserVerificationRequirement.UNSPECIFIED) authenticationOptions.userVerificationRequirement.value else null
-            )
-        }
+        fun from(authenticationOptions: AuthenticationOptions): Fido2Options = Fido2Options(
+            authenticatorSelection = null,
+            attestation = null,
+            userVerification = if (authenticationOptions.userVerificationRequirement !=
+                UserVerificationRequirement.UNSPECIFIED
+            ) {
+                authenticationOptions.userVerificationRequirement.value
+            } else {
+                null
+            }
+        )
     }
 }

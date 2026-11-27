@@ -25,7 +25,7 @@ class RegistrationUseCaseImpl(
     private val credentialManager: CredentialManager,
     private val fido2Repository: Fido2Repository,
     private val gson: Gson,
-    private val userFriendlyNameProvider: UserFriendlyNameProvider,
+    private val userFriendlyNameProvider: UserFriendlyNameProvider
 ) : RegistrationUseCase {
 
     companion object {
@@ -36,15 +36,11 @@ class RegistrationUseCaseImpl(
      * Executes the two-phase registration ceremony.
      *
      * Phase 1: Calls [Fido2Repository.startRegistration] to obtain a
-     * [CredentialCreationOptions] challenge from the server.
+     *          [ch.nevis.mobile.authentication.fido2.example.data.model.CredentialCreationOptions] challenge from the server.
      * Phase 2: Invokes [createPasskey] to let the user create a passkey and then
-     * submits the attestation to the server via [Fido2Repository.completeRegistration].
+     *          submits the attestation to the server via [Fido2Repository.completeRegistration].
      */
-    override suspend fun execute(
-        context: Context,
-        username: String,
-        registrationOptions: RegistrationOptions,
-    ) {
+    override suspend fun execute(context: Context, username: String, registrationOptions: RegistrationOptions) {
         // Phase 1: Request CredentialCreationOptions challenge from the server.
         val startRegistrationResponse = fido2Repository.startRegistration(
             StartRegistrationRequest(
@@ -79,13 +75,13 @@ class RegistrationUseCaseImpl(
             // Defines whether you prefer to use only immediately available
             // credentials, not hybrid credentials, to fulfill this request.
             // This value is false by default.
-            preferImmediatelyAvailableCredentials = preferImmediatelyAvailableCredentials,
+            preferImmediatelyAvailableCredentials = preferImmediatelyAvailableCredentials
         )
         val createCredentialResponse = credentialManager.createCredential(
             // Use an activity-based context to avoid undefined system
             // UI launching behavior
             context = context,
-            request = createPublicKeyCredentialRequest,
+            request = createPublicKeyCredentialRequest
         )
         handleCreateCredentialResponse(createCredentialResponse, startRegistrationResponse)
     }
@@ -116,17 +112,18 @@ class RegistrationUseCaseImpl(
                     PublicKeyCredentialRegistrationResponse::class.java
                 )
 
-
             fido2Repository.completeRegistration(
                 CompleteRegistrationRequest(
                     username = startRegistrationResponse.username,
                     statusToken = startRegistrationResponse.statusToken,
                     userFriendlyName = userFriendlyNameProvider.get(),
-                    publicKeyCredentialRegistrationResponse = publicKeyCredentialRegistrationResponse,
+                    publicKeyCredentialRegistrationResponse = publicKeyCredentialRegistrationResponse
                 )
             )
         } else {
-            throw IllegalArgumentException("Unexpected CreateCredentialResponse instance received. Class: ${createCredentialResponse::class.java}")
+            throw IllegalArgumentException(
+                "Unexpected CreateCredentialResponse instance received. Class: ${createCredentialResponse::class.java}"
+            )
         }
     }
 }

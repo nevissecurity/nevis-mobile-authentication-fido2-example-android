@@ -66,7 +66,7 @@ fun HomeScreenContent(
     onAuthenticateButtonClicked: () -> Unit,
     onAuthenticateUsernamelessButtonClicked: () -> Unit,
     onRegisterViaWebButtonClicked: () -> Unit,
-    onAuthenticateViaWebButtonClicked: () -> Unit,
+    onAuthenticateViaWebButtonClicked: () -> Unit
 ) {
     var isRegistrationExpanded by remember { mutableStateOf(false) }
     var isRegistrationOptionsExpanded by remember { mutableStateOf(false) }
@@ -79,7 +79,7 @@ fun HomeScreenContent(
         modifier = modifier
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(PaddingLarge),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         ExpandableContainer(
             modifier = Modifier
@@ -87,7 +87,7 @@ fun HomeScreenContent(
                     start = PaddingMedium,
                     top = PaddingLarge,
                     end = PaddingMedium,
-                    bottom = NoPadding,
+                    bottom = NoPadding
                 )
                 .fillMaxWidth(),
             title = stringResource(R.string.home_registration_title),
@@ -102,22 +102,23 @@ fun HomeScreenContent(
             }
         ) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(PaddingMedium),
+                verticalArrangement = Arrangement.spacedBy(PaddingMedium)
             ) {
                 UsernameTextField(
                     Modifier.fillMaxWidth(),
                     currentUsername = currentUsername,
-                    onUsernameChange = onUsernameChange,
+                    onUsernameChange = onUsernameChange
                 )
                 ExpandableContainer(
                     title = stringResource(R.string.registration_options_options_title),
                     isExpanded = isRegistrationOptionsExpanded,
                     onHeaderClicked = {
                         isRegistrationOptionsExpanded = !isRegistrationOptionsExpanded
-                    }) {
+                    }
+                ) {
                     RegistrationOptions(
                         currentRegistrationOptions = currentRegistrationOptions,
-                        onRegistrationOptionsChange = onRegistrationOptionsChange,
+                        onRegistrationOptionsChange = onRegistrationOptionsChange
                     )
                 }
                 Button(
@@ -133,7 +134,7 @@ fun HomeScreenContent(
             modifier = Modifier
                 .padding(
                     horizontal = PaddingMedium,
-                    vertical = NoPadding,
+                    vertical = NoPadding
                 )
                 .fillMaxWidth(),
             title = stringResource(R.string.home_authentication_title),
@@ -148,22 +149,23 @@ fun HomeScreenContent(
             }
         ) {
             Column(
-                verticalArrangement = Arrangement.spacedBy(PaddingMedium),
+                verticalArrangement = Arrangement.spacedBy(PaddingMedium)
             ) {
                 UsernameTextField(
                     Modifier.fillMaxWidth(),
                     currentUsername = currentUsername,
-                    onUsernameChange = onUsernameChange,
+                    onUsernameChange = onUsernameChange
                 )
                 ExpandableContainer(
                     title = stringResource(R.string.registration_options_options_title),
                     isExpanded = isAuthenticationOptionsExpanded,
                     onHeaderClicked = {
                         isAuthenticationOptionsExpanded = !isAuthenticationOptionsExpanded
-                    }) {
+                    }
+                ) {
                     AuthenticationOptions(
                         currentAuthenticationOptions = currentAuthenticationOptions,
-                        onAuthenticationOptionsChange = onAuthenticationOptionsChange,
+                        onAuthenticationOptionsChange = onAuthenticationOptionsChange
                     )
                 }
                 Button(
@@ -179,7 +181,7 @@ fun HomeScreenContent(
             modifier = Modifier
                 .padding(
                     horizontal = PaddingMedium,
-                    vertical = NoPadding,
+                    vertical = NoPadding
                 )
                 .fillMaxWidth(),
             title = stringResource(R.string.home_authentication_usernameless_title),
@@ -205,7 +207,7 @@ fun HomeScreenContent(
             modifier = Modifier
                 .padding(
                     horizontal = PaddingMedium,
-                    vertical = NoPadding,
+                    vertical = NoPadding
                 )
                 .fillMaxWidth(),
             title = stringResource(R.string.home_authorization_via_web_title),
@@ -237,7 +239,7 @@ fun HomeScreenContent(
             modifier = Modifier
                 .padding(
                     horizontal = PaddingMedium,
-                    vertical = NoPadding,
+                    vertical = NoPadding
                 )
                 .fillMaxWidth(),
             resultMessage = resultMessage
@@ -274,6 +276,6 @@ fun MainScreenContentPreview() {
         onAuthenticationOptionsChange = {},
         onRegistrationOptionsChange = {},
         onRegisterViaWebButtonClicked = {},
-        onAuthenticateViaWebButtonClicked = {},
+        onAuthenticateViaWebButtonClicked = {}
     )
 }

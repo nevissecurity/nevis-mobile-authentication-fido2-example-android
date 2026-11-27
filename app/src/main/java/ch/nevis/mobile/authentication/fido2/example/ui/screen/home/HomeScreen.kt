@@ -6,7 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -39,12 +38,11 @@ import ch.nevis.mobile.authentication.fido2.example.ui.composable.TopAppBar
  * @param lifecycleOwner The lifecycle owner used to attach observers.
  * @param onLaunchCustomTab Callback invoked when the user requests a web-based operation.
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     viewModel: HomeScreenViewModel = hiltViewModel(),
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
-    onLaunchCustomTab: (Uri) -> Unit,
+    onLaunchCustomTab: (Uri) -> Unit
 ) {
     val localContext = LocalContext.current
     val activity = LocalActivity.current as ComponentActivity
@@ -75,11 +73,9 @@ fun HomeScreen(
         // As MainActivity is configured with android:launchMode="singleTask",
         // onNewIntent and this listener is called. We can handle the Intent
         // here that comes from Custom Tab here.
-        val onNewIntentListener = object : Consumer<Intent> {
-            override fun accept(intent: Intent) {
-                viewModel.processIntent(intent)
-                intent.data = null
-            }
+        val onNewIntentListener = Consumer<Intent> { intent ->
+            viewModel.processIntent(intent)
+            intent.data = null
         }
         activity.addOnNewIntentListener(onNewIntentListener)
 
@@ -116,13 +112,17 @@ fun HomeScreen(
             onAuthenticateButtonClicked = { viewModel.authenticate(context = localContext) },
             onAuthenticateUsernamelessButtonClicked = { viewModel.authenticateUsernameless(context = localContext) },
             onRegisterViaWebButtonClicked = {
-                onLaunchCustomTab("${BuildConfig.BaseUrl}/fido2-test.html?token=$token&operation=$registrationOperation&redirectTo=$scheme".toUri())
+                onLaunchCustomTab(
+                    "${BuildConfig.BaseUrl}/fido2-test.html?token=$token&operation=$registrationOperation&redirectTo=$scheme".toUri()
+                )
             },
             onAuthenticateViaWebButtonClicked = {
-                onLaunchCustomTab("${BuildConfig.BaseUrl}/fido2-test.html?token=$token&operation=$authenticationOperation&redirectTo=$scheme".toUri())
+                onLaunchCustomTab(
+                    "${BuildConfig.BaseUrl}/fido2-test.html?token=$token&operation=$authenticationOperation&redirectTo=$scheme".toUri()
+                )
             },
             onAuthenticationOptionsChange = { viewModel.updateAuthenticationOptions(it) },
-            onRegistrationOptionsChange = { viewModel.updateRegistrationOptions(it) },
+            onRegistrationOptionsChange = { viewModel.updateRegistrationOptions(it) }
         )
     }
 

@@ -18,7 +18,6 @@ import ch.nevis.mobile.authentication.fido2.example.R
  */
 @Composable
 fun UsernameTextField(modifier: Modifier, currentUsername: String, onUsernameChange: (String) -> Unit) {
-
     TextField(
         value = currentUsername,
         modifier = modifier,

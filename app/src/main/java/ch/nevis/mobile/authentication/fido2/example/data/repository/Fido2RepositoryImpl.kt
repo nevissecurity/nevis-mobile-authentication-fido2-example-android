@@ -29,9 +29,7 @@ import ch.nevis.mobile.authentication.fido2.example.domain.repository.Fido2Repos
  * the network call to [AuthCloudDataSource], and then maps the returned data-layer DTOs back to
  * domain response models.
  */
-class Fido2RepositoryImpl(
-    private val authCloudDataSource: AuthCloudDataSource
-) : Fido2Repository {
+class Fido2RepositoryImpl(private val authCloudDataSource: AuthCloudDataSource) : Fido2Repository {
     override suspend fun startRegistration(request: StartRegistrationRequest): StartRegistrationResponse {
         val userEnrollmentResponse =
             authCloudDataSource.userEnrollment(
@@ -43,7 +41,7 @@ class Fido2RepositoryImpl(
         return StartRegistrationResponse(
             userEnrollmentResponse.username,
             userEnrollmentResponse.enrollment.statusToken,
-            userEnrollmentResponse.enrollment.credentialCreationOptions,
+            userEnrollmentResponse.enrollment.credentialCreationOptions
         )
     }
 
@@ -53,7 +51,7 @@ class Fido2RepositoryImpl(
                 id = request.publicKeyCredentialRegistrationResponse.id,
                 response = EnrollmentResponse(
                     request.publicKeyCredentialRegistrationResponse.response.attestationObject,
-                    request.publicKeyCredentialRegistrationResponse.response.clientDataJSON,
+                    request.publicKeyCredentialRegistrationResponse.response.clientDataJSON
                 ),
                 statusToken = request.statusToken,
                 type = request.publicKeyCredentialRegistrationResponse.type,
@@ -67,7 +65,7 @@ class Fido2RepositoryImpl(
         val approvalResponse = authCloudDataSource.approval(
             ApprovalRequest(
                 request.username,
-                Fido2Options.from(request.authenticationOptions),
+                Fido2Options.from(request.authenticationOptions)
             )
         )
         return StartApprovalResponse(
@@ -87,13 +85,15 @@ class Fido2RepositoryImpl(
                     request.publicKeyCredentialAuthenticationResponse.response.userHandle
                 ),
                 request.statusToken,
-                request.publicKeyCredentialAuthenticationResponse.type,
+                request.publicKeyCredentialAuthenticationResponse.type
             )
         )
         return CompleteApprovalResponse()
     }
 
-    override suspend fun introspect(request: ch.nevis.mobile.authentication.fido2.example.domain.model.IntrospectRequest): IntrospectResponse {
+    override suspend fun introspect(
+        request: ch.nevis.mobile.authentication.fido2.example.domain.model.IntrospectRequest
+    ): IntrospectResponse {
         val introspectResponse = authCloudDataSource.introspect(IntrospectRequest(request.token))
         return introspectResponse.toDomain()
     }

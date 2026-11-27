@@ -23,11 +23,7 @@ import androidx.compose.ui.unit.sp
  * @param onSelected Callback invoked with the index of the newly selected option.
  */
 @Composable
-fun Options(
-    values: List<String>,
-    currentSelectedIndex: Int = -1,
-    onSelected: (selectedIndex: Int) -> Unit
-) {
+fun Options(values: List<String>, currentSelectedIndex: Int = -1, onSelected: (selectedIndex: Int) -> Unit) {
     var selectedIndex by remember { mutableIntStateOf(currentSelectedIndex) }
     SingleChoiceSegmentedButtonRow(
         modifier = Modifier
@@ -48,7 +44,7 @@ fun Options(
                     fontSize = 12.sp,
                     softWrap = false,
                     maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
@@ -76,6 +72,7 @@ fun OptionsLongPreview() {
             "Second too long text",
             "Third too long text",
             "Fourth too long text"
-        ), 3
+        ),
+        3
     ) {}
 }

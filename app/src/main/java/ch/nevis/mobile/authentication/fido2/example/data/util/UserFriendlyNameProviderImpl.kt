@@ -15,9 +15,7 @@ import javax.inject.Inject
  * where the manufacturer prefix is omitted when the model name already starts with it.
  * Example: `"Google Pixel 8 2025-01-15 10:30"`.
  */
-class UserFriendlyNameProviderImpl @Inject constructor(
-    private val context: Context
-) : UserFriendlyNameProvider {
+class UserFriendlyNameProviderImpl @Inject constructor(private val context: Context) : UserFriendlyNameProvider {
     private val formatter: DateTimeFormatter =
         DateTimeFormatter.ofPattern(context.getString(R.string.user_friendly_name_provider_date_time_format))
 

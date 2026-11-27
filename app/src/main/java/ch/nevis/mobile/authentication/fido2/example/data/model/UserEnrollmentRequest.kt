@@ -11,10 +11,7 @@ import ch.nevis.mobile.authentication.fido2.example.data.util.Constants
  * @property username The username to enrol.
  * @property fido2Options Optional FIDO2 authenticator selection and attestation options.
  */
-data class UserEnrollmentRequest(
-    val username: CharSequence,
-    val fido2Options: Fido2Options? = null,
-) {
+data class UserEnrollmentRequest(val username: CharSequence, val fido2Options: Fido2Options? = null) {
     val channel = Constants.CHANNEL_FIDO2
     val displayName = username
 }

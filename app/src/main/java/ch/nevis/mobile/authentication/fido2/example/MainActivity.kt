@@ -11,7 +11,6 @@ import ch.nevis.mobile.authentication.fido2.example.ui.composable.NavigationComp
 import ch.nevis.mobile.authentication.fido2.example.ui.theme.FIDO2ExampleTheme
 import dagger.hilt.android.AndroidEntryPoint
 
-
 /**
  * The single [ComponentActivity] of the app.
  *
@@ -30,7 +29,7 @@ class MainActivity : ComponentActivity() {
             FIDO2ExampleTheme {
                 NavigationComponent(
                     navController = rememberNavController(),
-                    onLaunchCustomTab = { openCustomTab(it) },
+                    onLaunchCustomTab = { openCustomTab(it) }
                 )
             }
         }

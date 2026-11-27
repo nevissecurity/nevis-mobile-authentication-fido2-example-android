@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 plugins {
     alias(libs.plugins.android.application)
@@ -7,6 +8,7 @@ plugins {
     alias(libs.plugins.kotlin.serialization)
     kotlin("kapt")
     alias(libs.plugins.hilt.android)
+    alias(libs.plugins.ktlint)
 }
 
 android {
@@ -25,13 +27,14 @@ android {
 
     buildTypes {
         all {
-            signingConfig = signingConfigs.getByName("debug") {
-                // Define the signing config, uncomment these lines
-                // storeFile = file(getConfig("KEYSTORE_FILE"))
-                // storePassword = getConfig("KEYSTORE_PASSWORD")
-                // keyAlias = getConfig("KEY_ALIAS")
-                // keyPassword = getConfig("KEY_PASSWORD")
-            }
+            signingConfig =
+                signingConfigs.getByName("debug") {
+                    // Define the signing config, uncomment these lines
+                    // storeFile = file(getConfig("KEYSTORE_FILE"))
+                    // storePassword = getConfig("KEYSTORE_PASSWORD")
+                    // keyAlias = getConfig("KEY_ALIAS")
+                    // keyPassword = getConfig("KEY_PASSWORD")
+                }
 
             // HOST_NAME and BACKEND_ACCESS_TOKEN are injected from local.properties or environment variables
             // (see getConfig() at the bottom of this file) — never hardcoded in source.
@@ -65,6 +68,16 @@ android {
 
 kapt {
     correctErrorTypes = true
+}
+
+ktlint {
+    android.set(true)
+    ignoreFailures.set(false)
+    outputToConsole.set(true)
+    reporters {
+        reporter(ReporterType.PLAIN)
+        reporter(ReporterType.HTML)
+    }
 }
 
 dependencies {
@@ -122,5 +135,7 @@ fun Project.getConfig(name: String): String {
         return property(name).toString()
     }
 
-    throw GradleException("Getting configuration with name $name failed! Set it as environment variable or as local/project/system property.")
+    throw GradleException(
+        "Getting configuration with name $name failed! Set it as environment variable or as local/project/system property."
+    )
 }

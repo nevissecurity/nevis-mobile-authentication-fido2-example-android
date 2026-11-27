@@ -7,8 +7,4 @@ package ch.nevis.mobile.authentication.fido2.example.data.model
  * @property statusToken Opaque token required for the subsequent attestation call.
  * @property credentialCreationOptions The WebAuthn challenge to pass to Android Credential Manager.
  */
-data class Enrollment(
-    val transactionId: String,
-    val statusToken: String,
-    val credentialCreationOptions: CredentialCreationOptions,
-)
+data class Enrollment(val transactionId: String, val statusToken: String, val credentialCreationOptions: CredentialCreationOptions)

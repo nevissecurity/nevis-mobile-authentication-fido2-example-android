@@ -14,7 +14,7 @@ interface AuthenticationUseCase {
     /**
      * Executes the full authentication ceremony.
      *
-     * @param context An activity-based [Context] required by [CredentialManager.getCredential]
+     * @param context An activity-based [Context] required by [androidx.credentials.CredentialManager.getCredential]
      *                to display the system passkey selection UI.
      * @param username The username to authenticate. Pass `null` to initiate a
      *                 discoverable-credential (usernameless) flow where the user selects
@@ -24,9 +24,5 @@ interface AuthenticationUseCase {
      *         the passkey selection UI or no matching credential is available.
      * @throws retrofit2.HttpException if the server returns a non-2xx response.
      */
-    suspend fun execute(
-        context: Context,
-        username: String? = null,
-        authenticationOptions: AuthenticationOptions
-    )
+    suspend fun execute(context: Context, username: String? = null, authenticationOptions: AuthenticationOptions)
 }

@@ -7,8 +7,4 @@ package ch.nevis.mobile.authentication.fido2.example.data.model
  * @property displayName Human-readable display name for the user.
  * @property name The username.
  */
-data class User(
-    val id: String,
-    val displayName: String,
-    val name: String,
-)
+data class User(val id: String, val displayName: String, val name: String)

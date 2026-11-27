@@ -5,6 +5,4 @@ package ch.nevis.mobile.authentication.fido2.example.data.model
  *
  * @property token The JWT access token to validate.
  */
-data class IntrospectRequest(
-    val token: String,
-)
+data class IntrospectRequest(val token: String)

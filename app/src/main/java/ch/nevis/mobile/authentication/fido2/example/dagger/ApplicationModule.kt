@@ -41,8 +41,7 @@ object ApplicationModule {
      * Android Credential Manager API.
      */
     @Provides
-    fun provideCredentialManager(@ApplicationContext context: Context): CredentialManager =
-        CredentialManager.create(context)
+    fun provideCredentialManager(@ApplicationContext context: Context): CredentialManager = CredentialManager.create(context)
 
     /**
      * Provides a [Retrofit] instance configured with the Authentication Cloud base URL and
@@ -87,9 +86,8 @@ object ApplicationModule {
         credentialManager: CredentialManager,
         fido2Repository: Fido2Repository,
         gson: Gson,
-        userFriendlyNameProvider: UserFriendlyNameProvider,
-    ): RegistrationUseCase =
-        RegistrationUseCaseImpl(credentialManager, fido2Repository, gson, userFriendlyNameProvider)
+        userFriendlyNameProvider: UserFriendlyNameProvider
+    ): RegistrationUseCase = RegistrationUseCaseImpl(credentialManager, fido2Repository, gson, userFriendlyNameProvider)
 
     /**
      * Provides [AuthenticationUseCase] for driving the passkey authentication ceremony.
@@ -98,27 +96,24 @@ object ApplicationModule {
     fun provideAuthenticationUseCase(
         credentialManager: CredentialManager,
         fido2Repository: Fido2Repository,
-        gson: Gson,
+        gson: Gson
     ): AuthenticationUseCase = AuthenticationUseCaseImpl(credentialManager, fido2Repository, gson)
 
     /**
      * Provides [IntrospectUseCase] for validating JWT access tokens.
      */
     @Provides
-    fun provideValidateTokenUseCase(fido2Repository: Fido2Repository): IntrospectUseCase =
-        IntrospectUseCaseImpl(fido2Repository)
+    fun provideValidateTokenUseCase(fido2Repository: Fido2Repository): IntrospectUseCase = IntrospectUseCaseImpl(fido2Repository)
 
     /**
      * Provides [Fido2Repository] backed by [Fido2RepositoryImpl].
      */
     @Provides
-    fun provideFido2Repository(authCloudDataSource: AuthCloudDataSource): Fido2Repository =
-        Fido2RepositoryImpl(authCloudDataSource)
+    fun provideFido2Repository(authCloudDataSource: AuthCloudDataSource): Fido2Repository = Fido2RepositoryImpl(authCloudDataSource)
 
     /**
      * Provides [AuthCloudDataSource] backed by [AuthCloudDataSourceImpl].
      */
     @Provides
-    fun provideAuthCloudDataSource(retrofit: Retrofit): AuthCloudDataSource =
-        AuthCloudDataSourceImpl(retrofit)
+    fun provideAuthCloudDataSource(retrofit: Retrofit): AuthCloudDataSource = AuthCloudDataSourceImpl(retrofit)
 }

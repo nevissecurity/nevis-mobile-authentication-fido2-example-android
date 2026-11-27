@@ -12,9 +12,7 @@ abstract class WebAuthorizationResult
  *
  * @property token The JWT access token returned by the authorization server.
  */
-data class SuccessWebAuthorizationResult(
-    val token: String
-) : WebAuthorizationResult()
+data class SuccessWebAuthorizationResult(val token: String) : WebAuthorizationResult()
 
 /**
  * Indicates a failed web authorization. The server redirected to the app's deep-link
@@ -22,6 +20,4 @@ data class SuccessWebAuthorizationResult(
  *
  * @property error Human-readable error description returned by the server.
  */
-data class FailureWebAuthorizationResult(
-    val error: String
-) : WebAuthorizationResult()
+data class FailureWebAuthorizationResult(val error: String) : WebAuthorizationResult()

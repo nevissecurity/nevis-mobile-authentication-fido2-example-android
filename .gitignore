@@ -45,3 +45,6 @@ fastlane/test_output
 .env
 
 *.jks
+
+# AI coding assistants: local, per-user state
+.claude/settings.local.json

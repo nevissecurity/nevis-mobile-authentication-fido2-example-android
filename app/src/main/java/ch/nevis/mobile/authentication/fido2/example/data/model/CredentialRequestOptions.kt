@@ -19,7 +19,7 @@ data class CredentialRequestOptions(
     val timeout: Int? = null,
     val rpId: String? = null,
     val allowCredentials: Array<Credential> = emptyArray<Credential>(),
-    val userVerification: String? = null,
+    val userVerification: String? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

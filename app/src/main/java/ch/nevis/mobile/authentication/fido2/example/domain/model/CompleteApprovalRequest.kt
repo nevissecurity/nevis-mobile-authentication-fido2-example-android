@@ -11,5 +11,5 @@ import ch.nevis.mobile.authentication.fido2.example.credentials.model.PublicKeyC
  */
 data class CompleteApprovalRequest(
     val publicKeyCredentialAuthenticationResponse: PublicKeyCredentialAuthenticationResponse,
-    val statusToken: String,
+    val statusToken: String
 )

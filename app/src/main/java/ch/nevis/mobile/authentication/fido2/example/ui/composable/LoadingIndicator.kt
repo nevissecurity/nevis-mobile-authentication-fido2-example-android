@@ -25,13 +25,13 @@ fun LoadingIndicator(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.background(colorResource(R.color.loading_background)),
         verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
 
-        ) {
+    ) {
         CircularProgressIndicator(
             modifier = Modifier.width(64.dp),
             color = MaterialTheme.colorScheme.secondary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
+            trackColor = MaterialTheme.colorScheme.surfaceVariant
         )
     }
 }

@@ -38,9 +38,8 @@ desc " * **`backend_access_token`**: The token used to access the backend."
 desc ""
 lane :main do |options|
     host_name = options[:host_name] || ENV["HOST_NAME"]
-    # rubocop:disable Lint/UselessAssignment
+    # rubocop:disable-next Lint/UselessAssignment
     backend_access_token = options[:backend_access_token] || ENV["BACKEND_ACCESS_TOKEN"]
-    # rubocop:enable Lint/UselessAssignment
 
     version_number = options[:version_number] || "1.0.0"
     build_number = options[:build_number] || "1"

@@ -16,5 +16,5 @@ data class AuthenticatorAssertionResponse(
     val clientDataJSON: String,
     val authenticatorData: String,
     val signature: String,
-    val userHandle: String? = null,
+    val userHandle: String? = null
 )

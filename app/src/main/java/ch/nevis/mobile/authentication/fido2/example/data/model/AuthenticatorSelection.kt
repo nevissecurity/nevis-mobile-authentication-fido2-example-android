@@ -14,5 +14,5 @@ data class AuthenticatorSelection(
     var requireResidentKey: Boolean,
     var residentKey: String?,
     val userVerification: String?,
-    val authenticatorAttachment: String?,
+    val authenticatorAttachment: String?
 )

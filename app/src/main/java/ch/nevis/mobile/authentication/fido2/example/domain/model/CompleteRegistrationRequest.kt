@@ -16,5 +16,5 @@ data class CompleteRegistrationRequest(
     val username: String,
     val userFriendlyName: String,
     val statusToken: String,
-    val publicKeyCredentialRegistrationResponse: PublicKeyCredentialRegistrationResponse,
+    val publicKeyCredentialRegistrationResponse: PublicKeyCredentialRegistrationResponse
 )

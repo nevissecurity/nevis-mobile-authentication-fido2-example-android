@@ -19,15 +19,15 @@ import ch.nevis.mobile.authentication.fido2.example.ui.model.SuccessResultMessag
 import ch.nevis.mobile.authentication.fido2.example.ui.model.SuccessWebAuthorizationResult
 import ch.nevis.mobile.authentication.fido2.example.ui.model.WebAuthorizationResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import retrofit2.HttpException
-import javax.inject.Inject
 
 /**
- * ViewModel for [HomeScreen], exposing the UI state via [StateFlow] and handling
+ * ViewModel for [HomeScreen], exposing the UI state via [kotlinx.coroutines.flow.StateFlow] and handling
  * all FIDO2 operations.
  *
  * Coordinates [RegistrationUseCase], [AuthenticationUseCase], and [IntrospectUseCase]
@@ -37,7 +37,7 @@ import javax.inject.Inject
 class HomeScreenViewModel @Inject constructor(
     private val registrationUseCase: RegistrationUseCase,
     private val authenticationUseCase: AuthenticationUseCase,
-    private val introspectUseCase: IntrospectUseCase,
+    private val introspectUseCase: IntrospectUseCase
 ) : ViewModel() {
 
     companion object {
@@ -145,23 +145,21 @@ class HomeScreenViewModel @Inject constructor(
      *
      * @param intent The [Intent] delivered by the deep-link, or `null` if not applicable.
      */
-    fun processIntent(intent: Intent?) {
-        return when (intent?.data?.host) {
-            "success" -> {
-                val token = intent.data?.getQueryParameter("token")
-                    ?: throw IllegalStateException("Token parameter was not received.")
-                processWebAuthorizationResult(SuccessWebAuthorizationResult(token))
-            }
+    fun processIntent(intent: Intent?) = when (intent?.data?.host) {
+        "success" -> {
+            val token = intent.data?.getQueryParameter("token")
+                ?: throw IllegalStateException("Token parameter was not received.")
+            processWebAuthorizationResult(SuccessWebAuthorizationResult(token))
+        }
 
-            "failure" -> {
-                val error = intent.data?.getQueryParameter("error")
-                    ?: throw IllegalStateException("Error parameter was not received.")
-                processWebAuthorizationResult(FailureWebAuthorizationResult(error))
-            }
+        "failure" -> {
+            val error = intent.data?.getQueryParameter("error")
+                ?: throw IllegalStateException("Error parameter was not received.")
+            processWebAuthorizationResult(FailureWebAuthorizationResult(error))
+        }
 
-            else -> {
-                // Do nothing.
-            }
+        else -> {
+            // Do nothing.
         }
     }
 
@@ -188,12 +186,12 @@ class HomeScreenViewModel @Inject constructor(
                 val state = if (introspectResponse.isActive) {
                     SuccessResultMessage(
                         title = "Token is valid",
-                        message = introspectResponse.toString(),
+                        message = introspectResponse.toString()
                     )
                 } else {
                     ErrorResultMessage(
                         title = "Token is not valid",
-                        message = introspectResponse.toString(),
+                        message = introspectResponse.toString()
                     )
                 }
                 setState(state)
@@ -219,10 +217,7 @@ class HomeScreenViewModel @Inject constructor(
         Log.e(TAG, errorMessage, e)
     }
 
-    private fun setState(
-        resultMessage: ResultMessage = EmptyResultMessage(),
-        isLoading: Boolean = false
-    ) {
+    private fun setState(resultMessage: ResultMessage = EmptyResultMessage(), isLoading: Boolean = false) {
         _resultMessage.value = resultMessage
         _isLoading.value = isLoading
     }
