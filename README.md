@@ -1,7 +1,7 @@
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="https://www.nevis.net/hubfs/Nevis%202023%20theme/Icons/negativ.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://www.nevis.net/hubfs/Nevis%202023%20theme/Icons/positiv.svg">
-  <img alt="Fallback image description" src="https://www.nevis.net/hubfs/Nevis/images/logotype.svg">
+  <img alt="Nevis logo" src="https://www.nevis.net/hubfs/Nevis/images/logotype.svg">
 </picture>
 
 # Nevis Mobile Authentication FIDO2 Example App
@@ -27,41 +27,41 @@ The app exposes four option groups that are sent to the server as part of the re
 ### User Verification
 Controls whether the authenticator must verify the user (e.g. biometrics, PIN). See [`userVerification`](https://www.w3.org/TR/webauthn/#dom-publickeycredentialrequestoptions-userverification).
 
-| Value | Meaning |
-|---|---|
-| `required` | User verification is mandatory |
-| `preferred` | User verification is preferred but not mandatory |
-| `discouraged` | User verification should not be performed |
-| `unspecified` | No preference; the server decides |
+| Value         | Meaning                                          |
+|---------------|--------------------------------------------------|
+| `required`    | User verification is mandatory                   |
+| `preferred`   | User verification is preferred but not mandatory |
+| `discouraged` | User verification should not be performed        |
+| `unspecified` | No preference; the server decides                |
 
 ### Attestation
 Controls whether the server requests cryptographic proof of the authenticator's provenance. See [attestation conveyance preference](https://www.w3.org/TR/webauthn/#enum-attestation-convey).
 
-| Value | Meaning |
-|---|---|
-| `none` | No attestation required |
-| `indirect` | Anonymised attestation statement requested |
-| `direct` | Full attestation statement requested |
-| `unspecified` | No preference |
+| Value         | Meaning                                    |
+|---------------|--------------------------------------------|
+| `none`        | No attestation required                    |
+| `indirect`    | Anonymised attestation statement requested |
+| `direct`      | Full attestation statement requested       |
+| `unspecified` | No preference                              |
 
 ### Authenticator Attachment
 Restricts which class of authenticator may be used. See [`authenticatorAttachment`](https://www.w3.org/TR/webauthn/#enum-attachment).
 
-| Value | Meaning |
-|---|---|
-| `platform` | Built-in authenticator (fingerprint sensor, face recognition) |
-| `cross-platform` | Roaming authenticator (security key, another device) |
-| `unspecified` | No restriction |
+| Value            | Meaning                                                       |
+|------------------|---------------------------------------------------------------|
+| `platform`       | Built-in authenticator (fingerprint sensor, face recognition) |
+| `cross-platform` | Roaming authenticator (security key, another device)          |
+| `unspecified`    | No restriction                                                |
 
 ### Resident Key
 Controls whether the credential is stored on the authenticator (discoverable credential), enabling usernameless authentication. See [`residentKey`](https://www.w3.org/TR/webauthn/#dom-authenticatorselectioncriteria-residentkey).
 
-| Value | Meaning |
-|---|---|
-| `required` | A resident/discoverable credential must be created |
-| `preferred` | A resident credential is preferred |
-| `discouraged` | A non-resident credential is preferred |
-| `unspecified` | No preference |
+| Value         | Meaning                                            |
+|---------------|----------------------------------------------------|
+| `required`    | A resident/discoverable credential must be created |
+| `preferred`   | A resident credential is preferred                 |
+| `discouraged` | A non-resident credential is preferred             |
+| `unspecified` | No preference                                      |
 
 ## Getting Started
 
@@ -71,24 +71,24 @@ Before you start, ensure you have:
 
 Your development setup has to meet the following prerequisites:
 
-| Requirement | Version |
-|---|---|
-| Android | 9+ (API level 28+) |
-| JDK | 17 |
-| Gradle | 8.11.1+ |
+| Requirement    | Version                       |
+|----------------|-------------------------------|
+| Android        | 9+ (API level 28+)            |
+| JDK            | 17                            |
+| Gradle         | 8.11.1+                       |
 | Android Studio | Meerkat Feature Drop 2024.3.2 |
 
 ## Passkeys Support
 
 The [Android Credential Manager](https://developer.android.com/identity/sign-in/credential-manager) library supports passkeys on Android 9 (API level 28) and above. See the official [Passkeys on Android](https://developer.android.com/training/sign-in/passkeys) guide for a full overview.
 
-| Android Version | API Level | Credential Provider Support |
-|---|---|---|
-| Android 9–12 | 28–32 | Google Password Manager only |
-| Android 13 | 33 | Google Password Manager only |
-| Android 14+ | 34+ | Multiple providers supported |
+| Android Version | API Level | Credential Provider Support  |
+|-----------------|-----------|------------------------------|
+| Android 9–12    | 28–32     | Google Password Manager only |
+| Android 13      | 33        | Google Password Manager only |
+| Android 14+     | 34+       | Multiple providers supported |
 
-> **Note:** Prefilling the username field via autofill is only available for `View`-based UIs. As this app uses **Jetpack Compose**, automatic credential field pre-filling is not available. See [credential-manager-autofill](https://developer.android.com/identity/autofill/credential-manager-autofill) and [indicate_credential_fields](https://developer.android.com/identity/sign-in/credential-manager#indicate_credential_fields).
+> **Note:** Prefilling the username field via autofill is only available for `View`-based UIs. As this app uses **Jetpack Compose**, automatic credential field prefilling is not available. See [credential-manager-autofill](https://developer.android.com/identity/autofill/credential-manager-autofill) and [indicate_credential_fields](https://developer.android.com/identity/sign-in/credential-manager#indicate_credential_fields).
 
 ## Configuration
 
@@ -115,7 +115,7 @@ You must also uncomment the lines in `app/build.gradle.kts` where the `signingCo
 An example of `assetlinks.json` can be found below. Note that you must also include the package_name of this application (`ch.nevis.mobile.authentication.fido2.example`).
 
 ```properties title="./well-known/assetlinks.json"
-[{"relation":["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"ch.nevis.mobile.authentication.fido2.example","sha256_cert_fingerprints":["CF:B5:E4:C3:AD:9D:02:7F:C1:B1:C9:0E:43:D6:B7:38:C8:66:97:08:73:76:BD:95:91:CB:30:20:8C:89:80:91","91:D7:03:AF:EB:09:57:27:40:91:9E:A7:4F:F1:D1:DD:4A:49:15:27:7E:BC:F3:91:5C:BC:30:F0:32:07:57:B7"]}}]
+[{"relation"=["delegate_permission/common.handle_all_urls"],"target":{"namespace":"android_app","package_name":"ch.nevis.mobile.authentication.fido2.example","sha256_cert_fingerprints":["CF:B5:E4:C3:AD:9D:02:7F:C1:B1:C9:0E:43:D6:B7:38:C8:66:97:08:73:76:BD:95:91:CB:30:20:8C:89:80:91","91:D7:03:AF:EB:09:57:27:40:91:9E:A7:4F:F1:D1:DD:4A:49:15:27:7E:BC:F3:91:5C:BC:30:F0:32:07:57:B7"]}}]
 ```
 
 You must update the [relying origin](https://docs.nevis.net/authcloud/management-console/system#relying-origin) in the AuthCloud instance configuration. Here you must provide as origin the key hash of your application (of type `android:apk-key-hash:<key hash>`). Refer to [Facet ID](https://docs.nevis.net/nevisaccessapp/appendixes/facetid-calculation#android) documentation to know how to calculate the origin.
@@ -176,23 +176,27 @@ Dependency injection is provided by **[Hilt](https://developer.android.com/train
 
 ## Dependencies
 
-| Library | Purpose |
-|---|---|
-| [Jetpack Compose](https://developer.android.com/compose) + Material 3 | Declarative UI framework |
-| [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) | Dependency injection |
-| [Retrofit 2](https://square.github.io/retrofit/) + [OkHttp](https://square.github.io/okhttp/) | HTTP networking |
+| Library                                                                                         | Purpose                             |
+|-------------------------------------------------------------------------------------------------|-------------------------------------|
+| [Jetpack Compose](https://developer.android.com/compose) + Material 3                           | Declarative UI framework            |
+| [Hilt](https://developer.android.com/training/dependency-injection/hilt-android)                | Dependency injection                |
+| [Retrofit 2](https://square.github.io/retrofit/) + [OkHttp](https://square.github.io/okhttp/)   | HTTP networking                     |
 | [Android Credential Manager](https://developer.android.com/identity/sign-in/credential-manager) | Passkey creation and authentication |
-| [Navigation Compose](https://developer.android.com/guide/navigation/navigation-compose) | In-app navigation |
-| [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization) | JSON serialization |
-| [Chrome Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs) | Web-based authorization flow |
+| [Navigation Compose](https://developer.android.com/guide/navigation/navigation-compose)         | In-app navigation                   |
+| [Kotlinx Serialization](https://github.com/Kotlin/kotlinx.serialization)                        | JSON serialization                  |
+| [Chrome Custom Tabs](https://developer.chrome.com/docs/android/custom-tabs)                     | Web-based authorization flow        |
 
 ## Troubleshooting
 
-| Symptom | Likely Cause & Fix |
-|---|---|
+| Symptom                                                                              | Likely Cause & Fix                                                                                                                   |
+|--------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------|
 | Build fails with `GradleException: Getting configuration with name HOST_NAME failed` | `HOST_NAME` or `BACKEND_ACCESS_TOKEN` is not set — add them to `local.properties` or export as environment variables before building |
-| Passkey creation fails on emulator | Use a physical device, or an emulator with Google Play Services and a Google account signed in |
-| "No credentials available" during authentication | Register a passkey first on the same device using the same Google account |
+| Passkey creation fails on emulator                                                   | Use a physical device, or an emulator with Google Play Services and a Google account signed in                                       |
+| "No credentials available" during authentication                                     | Register a passkey first on the same device using the same Google account                                                            |
+
+## AI Assistant Support
+
+This repository contains an [AGENTS.md](AGENTS.md) file with project context for AI coding assistants (e.g. Claude Code, Cursor, GitHub Copilot). `CLAUDE.md`, `.cursorrules` and `.github/copilot-instructions.md` are symlinks to it. It helps the assistant answer questions about configuring, running and adapting the example app, and about moving its passkey integration code into your own application.
 
 ---
 
