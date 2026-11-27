@@ -25,7 +25,7 @@ interface Fido2Repository {
      * Initiates a passkey registration ceremony by requesting enrollment options from the server.
      *
      * @param request The username and FIDO2 options for the registration.
-     * @return A [StartRegistrationResponse] containing the WebAuthn [CredentialCreationOptions]
+     * @return A [StartRegistrationResponse] containing the WebAuthn [ch.nevis.mobile.authentication.fido2.example.data.model.CredentialCreationOptions]
      *         challenge and a status token needed for the second phase.
      * @throws retrofit2.HttpException if the server returns a non-2xx response.
      */
@@ -45,7 +45,7 @@ interface Fido2Repository {
      *
      * @param request The optional username (pass `null` for discoverable-credential / usernameless
      *                flow) and FIDO2 options.
-     * @return A [StartApprovalResponse] containing the WebAuthn [CredentialRequestOptions] challenge
+     * @return A [StartApprovalResponse] containing the WebAuthn [ch.nevis.mobile.authentication.fido2.example.data.model.CredentialRequestOptions] challenge
      *         and a status token needed for the second phase.
      * @throws retrofit2.HttpException if the server returns a non-2xx response.
      */

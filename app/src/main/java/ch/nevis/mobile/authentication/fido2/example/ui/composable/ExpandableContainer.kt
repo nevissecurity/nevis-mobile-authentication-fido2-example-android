@@ -54,15 +54,15 @@ fun ExpandableContainer(
             Row(
                 modifier = Modifier
                     .clickable(enabled = true, onClick = onHeaderClicked),
-                verticalAlignment = Alignment.CenterVertically,
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
                     modifier = Modifier
                         .padding(
                             horizontal = PaddingMedium,
-                            vertical = PaddingLarge,
+                            vertical = PaddingLarge
                         ),
-                    text = title,
+                    text = title
                 )
                 Spacer(
                     modifier = Modifier
@@ -72,11 +72,11 @@ fun ExpandableContainer(
                     modifier = Modifier
                         .padding(
                             horizontal = PaddingMedium,
-                            vertical = PaddingLarge,
+                            vertical = PaddingLarge
                         )
                         .size(22.dp),
                     imageVector = if (isExpanded) Icons.Default.KeyboardArrowUp else Icons.Default.KeyboardArrowDown,
-                    contentDescription = "Expand icon",
+                    contentDescription = "Expand icon"
                 )
             }
             if (isExpanded) {
@@ -86,7 +86,7 @@ fun ExpandableContainer(
                             start = PaddingMedium,
                             top = PaddingMedium,
                             end = PaddingMedium,
-                            bottom = NoPadding,
+                            bottom = NoPadding
                         )
                 )
                 Column(
@@ -95,9 +95,9 @@ fun ExpandableContainer(
                             start = PaddingMedium,
                             top = PaddingMedium,
                             end = PaddingMedium,
-                            bottom = PaddingLarge,
+                            bottom = PaddingLarge
                         )
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
                 ) {
                     content()
                 }

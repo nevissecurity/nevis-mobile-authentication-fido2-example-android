@@ -11,9 +11,6 @@ import ch.nevis.mobile.authentication.fido2.example.data.util.Constants
  * @property username The username for account-bound authentication, or `null` for usernameless flow.
  * @property fido2Options FIDO2 options for the authentication ceremony.
  */
-data class ApprovalRequest(
-    val username: CharSequence? = null,
-    val fido2Options: Fido2Options,
-) {
+data class ApprovalRequest(val username: CharSequence? = null, val fido2Options: Fido2Options) {
     val channel = Constants.CHANNEL_FIDO2
 }

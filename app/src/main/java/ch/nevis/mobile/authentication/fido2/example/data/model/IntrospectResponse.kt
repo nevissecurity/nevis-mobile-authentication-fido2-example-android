@@ -26,11 +26,11 @@ data class IntrospectResponse(
     val aud: String?,
     val iss: String?,
     val jti: String?,
-    val scope: String?,
+    val scope: String?
 )
 
-fun IntrospectResponse.toDomain(): ch.nevis.mobile.authentication.fido2.example.domain.model.IntrospectResponse {
-    return ch.nevis.mobile.authentication.fido2.example.domain.model.IntrospectResponse(
+fun IntrospectResponse.toDomain(): ch.nevis.mobile.authentication.fido2.example.domain.model.IntrospectResponse =
+    ch.nevis.mobile.authentication.fido2.example.domain.model.IntrospectResponse(
         isActive = active ?: false,
         issuedAt = iat.toDate(),
         expirationTime = exp.toDate(),
@@ -39,14 +39,11 @@ fun IntrospectResponse.toDomain(): ch.nevis.mobile.authentication.fido2.example.
         audience = aud,
         issuer = iss,
         jwtId = jti,
-        scope = scope,
+        scope = scope
     )
-}
 
-private fun String?.toDate(): Date? {
-    return if (this != null) {
-        Date(this.toLong())
-    } else {
-        null
-    }
+private fun String?.toDate(): Date? = if (this != null) {
+    Date(this.toLong())
+} else {
+    null
 }

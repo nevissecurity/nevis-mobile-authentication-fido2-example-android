@@ -23,12 +23,9 @@ object Home
  * @param onLaunchCustomTab Callback forwarded to [HomeScreen] for web-based authorization.
  */
 @Composable
-fun NavigationComponent(
-    navController: NavHostController,
-    onLaunchCustomTab: (Uri) -> Unit
-) {
+fun NavigationComponent(navController: NavHostController, onLaunchCustomTab: (Uri) -> Unit) {
     NavHost(navController = navController, startDestination = Home) {
-        composable<Home>() {
+        composable<Home> {
             HomeScreen(
                 onLaunchCustomTab = onLaunchCustomTab
             )

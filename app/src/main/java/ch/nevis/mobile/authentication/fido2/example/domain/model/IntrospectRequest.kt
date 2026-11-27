@@ -5,6 +5,4 @@ package ch.nevis.mobile.authentication.fido2.example.domain.model
  *
  * @property token The raw JWT string to validate.
  */
-data class IntrospectRequest(
-    val token: String,
-)
+data class IntrospectRequest(val token: String)

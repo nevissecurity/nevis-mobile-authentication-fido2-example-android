@@ -15,7 +15,7 @@ data class RegistrationOptions(
     val userVerificationRequirement: UserVerificationRequirement = UserVerificationRequirement.REQUIRED,
     val authenticatorAttachment: AuthenticatorAttachment = AuthenticatorAttachment.PLATFORM,
     val attestationConveyancePreference: AttestationConveyancePreference = AttestationConveyancePreference.UNSPECIFIED,
-    val residentKey: ResidentKey = ResidentKey.REQUIRED,
+    val residentKey: ResidentKey = ResidentKey.REQUIRED
 )
 
 /**
@@ -23,26 +23,25 @@ data class RegistrationOptions(
  *
  * @property userVerificationRequirement Whether user verification is required during assertion.
  */
-data class AuthenticationOptions(
-    val userVerificationRequirement: UserVerificationRequirement = UserVerificationRequirement.REQUIRED,
-)
+data class AuthenticationOptions(val userVerificationRequirement: UserVerificationRequirement = UserVerificationRequirement.REQUIRED)
 
 /**
  * Specifies whether and how user verification is required during a FIDO2 ceremony.
  *
  * Maps to the WebAuthn `UserVerificationRequirement` enum values.
  */
-enum class UserVerificationRequirement(
-    val value: String,
-) {
+enum class UserVerificationRequirement(val value: String) {
     /** Indicates no preference; the server will decide. */
     UNSPECIFIED("unspecified"),
+
     /** User verification is preferred but not required. */
     PREFERRED("preferred"),
+
     /** User verification is required. The ceremony will fail without it. */
     REQUIRED("required"),
+
     /** User verification should not be performed. */
-    DISCOURAGED("discouraged");
+    DISCOURAGED("discouraged")
 }
 
 /**
@@ -50,15 +49,15 @@ enum class UserVerificationRequirement(
  *
  * Maps to the WebAuthn `AuthenticatorAttachment` enum values.
  */
-enum class AuthenticatorAttachment(
-    val value: String,
-) {
+enum class AuthenticatorAttachment(val value: String) {
     /** No preference; any authenticator may be used. */
     UNSPECIFIED("unspecified"),
+
     /** A platform authenticator (e.g. device biometric, face recognition) is preferred. */
     PLATFORM("platform"),
+
     /** A roaming authenticator (e.g. security key) is preferred. */
-    CROSS_PLATFORM("cross-platform");
+    CROSS_PLATFORM("cross-platform")
 }
 
 /**
@@ -66,17 +65,18 @@ enum class AuthenticatorAttachment(
  *
  * Maps to the WebAuthn `AttestationConveyancePreference` enum values.
  */
-enum class AttestationConveyancePreference(
-    val value: String,
-) {
+enum class AttestationConveyancePreference(val value: String) {
     /** No preference; the authenticator may or may not provide attestation. */
     UNSPECIFIED("unspecified"),
+
     /** No attestation data is sent. */
     NONE("none"),
+
     /** The authenticator's attestation is verifiable by the server, potentially anonymised. */
     INDIRECT("indirect"),
+
     /** The authenticator's attestation is directly verifiable by the server. */
-    DIRECT("direct");
+    DIRECT("direct")
 }
 
 /**
@@ -84,15 +84,16 @@ enum class AttestationConveyancePreference(
  *
  * Maps to the WebAuthn `ResidentKeyRequirement` enum values.
  */
-enum class ResidentKey(
-    val value: String,
-) {
+enum class ResidentKey(val value: String) {
     /** No preference; the platform decides. */
     UNSPECIFIED("unspecified"),
+
     /** A resident key is preferred but not required. */
     PREFERRED("preferred"),
+
     /** A resident key is required for discoverable-credential / usernameless authentication. */
     REQUIRED("required"),
+
     /** A resident key should not be created. */
-    DISCOURAGED("discouraged");
+    DISCOURAGED("discouraged")
 }

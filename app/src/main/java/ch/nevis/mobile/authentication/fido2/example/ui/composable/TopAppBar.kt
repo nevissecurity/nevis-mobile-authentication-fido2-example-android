@@ -20,7 +20,7 @@ fun TopAppBar() {
     CenterAlignedTopAppBar(
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary,
+            titleContentColor = MaterialTheme.colorScheme.primary
         ),
         title = {
             Text(
@@ -28,7 +28,7 @@ fun TopAppBar() {
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
-        },
+        }
     )
 }
 

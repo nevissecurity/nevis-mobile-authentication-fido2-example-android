@@ -24,7 +24,7 @@ data class IntrospectResponse(
     val audience: String?,
     val issuer: String?,
     val jwtId: String?,
-    val scope: String?,
+    val scope: String?
 ) {
     override fun toString(): String {
         val stringBuffer = StringBuilder()

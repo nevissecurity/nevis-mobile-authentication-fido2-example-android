@@ -18,5 +18,5 @@ data class UserEnrollmentResponse(
     val status: String,
     val createdAt: Date,
     val updatedAt: Date,
-    val enrollment: Enrollment,
+    val enrollment: Enrollment
 )

@@ -19,7 +19,7 @@ import retrofit2.http.POST
 /**
  * Retrofit interface declaring all Nevis Authentication Cloud HTTP endpoints used by this app.
  *
- * Instances are created by [Retrofit.create] and should only be used through [AuthCloudDataSourceImpl].
+ * Instances are created by [retrofit2.Retrofit.create] and should only be used through [ch.nevis.mobile.authentication.fido2.example.data.datasource.AuthCloudDataSourceImpl].
  */
 interface ApiInterface {
 
@@ -42,36 +42,26 @@ interface ApiInterface {
         "Content-Type: application/json;charset=utf-8"
     )
     @POST("_app/attestation/result/")
-    suspend fun attestation(
-        @Body attestationRequest: AttestationRequest
-    ): AttestationResponse
+    suspend fun attestation(@Body attestationRequest: AttestationRequest): AttestationResponse
 
     /**
      * `POST api/v1/approval/` — requests a WebAuthn `CredentialRequestOptions` challenge to
      * start the authentication ceremony.
      */
     @POST("api/v1/approval/")
-    suspend fun approval(
-        @HeaderMap headers: Map<String, String>,
-        @Body approvalRequest: ApprovalRequest
-    ): ApprovalResponse
+    suspend fun approval(@HeaderMap headers: Map<String, String>, @Body approvalRequest: ApprovalRequest): ApprovalResponse
 
     /**
      * `POST _app/assertion/result/` — submits the WebAuthn assertion response after the user
      * authenticates with a passkey.
      */
     @POST("_app/assertion/result/")
-    suspend fun assertion(
-        @Body assertionRequest: AssertionRequest
-    ): AssertionResponse
+    suspend fun assertion(@Body assertionRequest: AssertionRequest): AssertionResponse
 
     /**
      * `POST api/v1/introspect` — validates a JWT access token and returns its claims.
      */
     @FormUrlEncoded
     @POST("api/v1/introspect")
-    suspend fun introspect(
-        @HeaderMap headers: Map<String, String>,
-        @Field("token") token: String
-    ): IntrospectResponse
+    suspend fun introspect(@HeaderMap headers: Map<String, String>, @Field("token") token: String): IntrospectResponse
 }

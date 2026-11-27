@@ -2,7 +2,7 @@ package ch.nevis.mobile.authentication.fido2.example.credentials.model
 
 /**
  * Deserialized representation of the JSON authentication response returned by Android Credential
- * Manager via [PublicKeyCredential.authenticationResponseJson].
+ * Manager via [androidx.credentials.PublicKeyCredential.authenticationResponseJson].
  *
  * Maps to the WebAuthn `AuthenticationResponseJSON` structure.
  *
@@ -19,5 +19,5 @@ data class PublicKeyCredentialAuthenticationResponse(
     val response: AuthenticatorAssertionResponse,
     val clientExtensionResults: AuthenticationExtensionsClientOutputs,
     val type: String,
-    val authenticatorAttachment: String? = null,
+    val authenticatorAttachment: String? = null
 )

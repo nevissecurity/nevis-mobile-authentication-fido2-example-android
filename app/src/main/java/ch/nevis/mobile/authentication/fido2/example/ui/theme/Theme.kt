@@ -45,6 +45,7 @@ fun FIDO2ExampleTheme(
         }
 
         darkTheme -> DarkColorScheme
+
         else -> LightColorScheme
     }
 

@@ -8,8 +8,4 @@ package ch.nevis.mobile.authentication.fido2.example.data.model
  * @property status The outcome status string (e.g. `"success"`).
  * @property token The JWT access token issued on successful authentication, or `null` on failure.
  */
-data class AssertionResponse(
-    val errorMessage: String? = null,
-    val status: String? = null,
-    val token: String? = null,
-)
+data class AssertionResponse(val errorMessage: String? = null, val status: String? = null, val token: String? = null)

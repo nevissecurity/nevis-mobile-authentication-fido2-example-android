@@ -20,7 +20,7 @@ data class AuthenticatorAttestationResponse(
     val transports: Array<String>,
     val authenticatorData: String,
     val publicKeyAlgorithm: Int,
-    val publicKey: String,
+    val publicKey: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -23,7 +23,7 @@ import com.google.gson.Gson
 class AuthenticationUseCaseImpl(
     private val credentialManager: CredentialManager,
     private val fido2Repository: Fido2Repository,
-    private val gson: Gson,
+    private val gson: Gson
 ) : AuthenticationUseCase {
 
     companion object {
@@ -33,7 +33,7 @@ class AuthenticationUseCaseImpl(
     /**
      * Executes the two-phase authentication ceremony.
      *
-     * Phase 1: Calls [Fido2Repository.startApproval] to obtain a [CredentialRequestOptions]
+     * Phase 1: Calls [Fido2Repository.startApproval] to obtain a [ch.nevis.mobile.authentication.fido2.example.data.model.CredentialRequestOptions]
      * challenge from the server.
      * Phase 2: Invokes [getPasskey] to present the system passkey selector, then submits
      * the assertion to the server via [Fido2Repository.completeApproval].
@@ -42,11 +42,7 @@ class AuthenticationUseCaseImpl(
      * @param username The username for account-bound flow, or `null` for discoverable-credential flow.
      * @param authenticationOptions FIDO2 options for the ceremony.
      */
-    override suspend fun execute(
-        context: Context,
-        username: String?,
-        authenticationOptions: AuthenticationOptions
-    ) {
+    override suspend fun execute(context: Context, username: String?, authenticationOptions: AuthenticationOptions) {
         // If username is null, the server will initiate a discoverable-credential (usernameless) flow.
         val startApprovalResponse =
             fido2Repository.startApproval(StartApprovalRequest(username, authenticationOptions))
@@ -69,7 +65,7 @@ class AuthenticationUseCaseImpl(
 
     private suspend fun handleGetCredentialResponse(
         getCredentialResponse: GetCredentialResponse,
-        startApprovalResponse: StartApprovalResponse,
+        startApprovalResponse: StartApprovalResponse
     ) {
         val credential = getCredentialResponse.credential
         if (credential is PublicKeyCredential) {
@@ -86,7 +82,7 @@ class AuthenticationUseCaseImpl(
             fido2Repository.completeApproval(
                 CompleteApprovalRequest(
                     publicKeyCredentialAuthenticationResponse,
-                    startApprovalResponse.statusToken,
+                    startApprovalResponse.statusToken
                 )
             )
         }

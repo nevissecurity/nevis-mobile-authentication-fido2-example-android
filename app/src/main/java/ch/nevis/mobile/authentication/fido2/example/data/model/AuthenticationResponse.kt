@@ -12,9 +12,4 @@ package ch.nevis.mobile.authentication.fido2.example.data.model
  * @property userHandle Base64URL-encoded user handle identifying the user, or `null` for
  *           non-discoverable credentials.
  */
-data class AuthenticationResponse(
-    val authenticatorData: String,
-    val clientDataJSON: String,
-    val signature: String,
-    val userHandle: String?
-)
+data class AuthenticationResponse(val authenticatorData: String, val clientDataJSON: String, val signature: String, val userHandle: String?)

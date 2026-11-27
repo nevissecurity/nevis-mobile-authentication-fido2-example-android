@@ -46,7 +46,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
+                "proguard-rules.pro"
             )
         }
     }
@@ -136,6 +136,6 @@ fun Project.getConfig(name: String): String {
     }
 
     throw GradleException(
-        "Getting configuration with name $name failed! Set it as environment variable or as local/project/system property.",
+        "Getting configuration with name $name failed! Set it as environment variable or as local/project/system property."
     )
 }

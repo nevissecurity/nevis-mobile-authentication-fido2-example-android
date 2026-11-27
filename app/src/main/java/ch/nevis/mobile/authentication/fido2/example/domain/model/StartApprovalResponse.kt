@@ -9,7 +9,4 @@ import ch.nevis.mobile.authentication.fido2.example.data.model.CredentialRequest
  *           to be forwarded to Android Credential Manager.
  * @property statusToken Opaque token that must be included in [CompleteApprovalRequest].
  */
-data class StartApprovalResponse(
-    val credentialRequestOptions: CredentialRequestOptions,
-    val statusToken: String,
-)
+data class StartApprovalResponse(val credentialRequestOptions: CredentialRequestOptions, val statusToken: String)

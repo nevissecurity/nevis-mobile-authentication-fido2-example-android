@@ -15,5 +15,5 @@ import ch.nevis.mobile.authentication.fido2.example.data.model.CredentialCreatio
 data class StartRegistrationResponse(
     val username: String,
     val statusToken: String,
-    val credentialCreationOptions: CredentialCreationOptions,
+    val credentialCreationOptions: CredentialCreationOptions
 )
